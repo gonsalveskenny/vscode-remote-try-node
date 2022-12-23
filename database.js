@@ -1,7 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
-const { process } = require('ipaddr.js');
 
 const app = express();
 const port = process.env.EXPRESSPORT;
