@@ -114,6 +114,6 @@ app.delete('/notes/:id', (req, res) => {
   });
 });
 
-app.listen(port, () => {
+app.listen(port, process.env.IP, () => {
   console.log(`API listening on port ${port}`);
 });
