@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 const port = 3000;
@@ -13,6 +14,42 @@ const connection = mysql.createConnection({
   port: '5860',
   database: 'railway'
 });
+
+app.post('/login', (req, res) => {
+  // Authenticate the user and generate a JWT
+  const token = jwt.sign({ email: req.body.email }, 'secret_key', { expiresIn: '1h' });
+
+  // Send the token back to the client
+  res.send({ token });
+});
+
+function requireAuth(req, res, next) {
+  // Get the token from the headers
+  const token = req.headers['x-access-token'];
+
+  // If no token was provided, return a 401 unauthorized response
+  if (!token) {
+    res.status(401).send('Unauthorized');
+    return;
+  }
+
+  // Verify the token
+  jwt.verify(token, 'secret_key', (error, decoded) => {
+    if (error) {
+      res.status(401).send('Unauthorized');
+      return;
+    }
+
+    // If the token is valid, allow the request
+    next();
+  });
+}
+
+app.get('/protected', requireAuth, (req, res) => {
+  // This route is protected and can only be accessed by authenticated users
+  res.send('Protected resource');
+});
+
 
 app.get('/', (req, res) => {
   connection.query('SELECT * FROM notes', (error, results) => {
