@@ -7,9 +7,9 @@ const port = 3000;
 app.use(express.json())
 
 const connection = mysql.createConnection({
-  host: '52.226.222.222',
+  host: 'containers-us-west-60.railway.app',
   user: 'root',
-  password: 'password',
+  password: 'VzElDcFqdvoBXH5jnpR9',
   database: 'notes_app'
 });
 
