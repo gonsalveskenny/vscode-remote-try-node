@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const port = process.env.EXPRESSPORT;
+const port = 3000;
 
 app.use(express.json())
 
@@ -114,6 +114,6 @@ app.delete('/notes/:id', (req, res) => {
   });
 });
 
-app.listen(port, process.env.IP, () => {
+app.listen(port, () => {
   console.log(`API listening on port ${port}`);
 });
