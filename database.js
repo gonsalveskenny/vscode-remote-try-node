@@ -14,6 +14,15 @@ const connection = mysql.createConnection({
   database: 'railway'
 });
 
+app.get('/', (req, res) => {
+  connection.query('SELECT * FROM notes', (error, results) => {
+    if (error) {
+      return res.send(error);
+    }
+    res.send({ message: 'API service running' });
+  });
+});
+
 app.get('/notes', (req, res) => {
   connection.query('SELECT * FROM notes', (error, results) => {
     if (error) {
