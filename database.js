@@ -10,7 +10,8 @@ const connection = mysql.createConnection({
   host: 'containers-us-west-60.railway.app',
   user: 'root',
   password: 'VzElDcFqdvoBXH5jnpR9',
-  database: 'notes_app'
+  port: '5860',
+  database: 'railway'
 });
 
 app.get('/notes', (req, res) => {
