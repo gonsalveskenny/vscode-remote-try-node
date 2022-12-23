@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const { process } = require('ipaddr.js');
 
 const app = express();
-const port = 3000;
+const port = process.env.EXPRESSPORT;
 
 app.use(express.json())
 
